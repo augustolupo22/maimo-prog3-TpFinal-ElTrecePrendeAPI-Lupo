@@ -4,6 +4,7 @@ import cors from "cors";
 import indexRoutes from "./routes/index.js";
 import programsRoutes from "./routes/programs.js";
 import { connectDb } from "./db.js";
+import staffRoutes from "./routes/staff.js";
 
 console.log("\x1Bc");
 
@@ -14,6 +15,7 @@ app.set("port", process.env.PORT || 4000);
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
+app.use("/staff", staffRoutes);
 
 // RUTAS
 app.use("/", indexRoutes);
