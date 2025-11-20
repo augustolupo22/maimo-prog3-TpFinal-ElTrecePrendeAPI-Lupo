@@ -16,7 +16,10 @@ router.get("/", async (req, res) => {
 // GET → un programa por ID
 router.get("/:id", async (req, res) => {
   try {
-    const program = await Program.findById(req.params.id);
+    const program = await Program.findOne({ _id: req.params.id });
+    if (!program) {
+      return res.status(404).json({ message: "Programa no encontrado" });
+    }
     res.status(200).json(program);
   } catch (error) {
     res.status(500).json({ message: "Error al obtener programa", error });
