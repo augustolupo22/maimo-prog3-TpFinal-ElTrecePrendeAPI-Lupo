@@ -17,4 +17,3 @@ const programSchema = new Schema({
 });
 
 export default mongoose.model("Program", programSchema, "programs");
-

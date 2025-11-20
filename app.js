@@ -1,26 +1,34 @@
 import "dotenv/config";
 import express from "express";
 import cors from "cors";
+
+// Rutas
 import indexRoutes from "./routes/index.js";
 import programsRoutes from "./routes/programs.js";
-import { connectDb } from "./db.js";
 import staffRoutes from "./routes/staff.js";
 
-console.log("\x1Bc");
+// DB
+import { connectDb } from "./db.js";
 
 const app = express();
-connectDb();
 
-app.set("port", process.env.PORT || 4000);
+// Middlewares
+app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(cors());
-app.use("/staff", staffRoutes);
 
-// RUTAS
+// Conexión DB
+connectDb();
+
+// PORT
+const PORT = process.env.PORT || 4000;
+
+// Rutas
 app.use("/", indexRoutes);
 app.use("/programs", programsRoutes);
+app.use("/staff", staffRoutes);
 
-app.listen(app.get("port"), () => {
-  console.log(`Server on port ${app.get("port")}`);
+// Server
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
