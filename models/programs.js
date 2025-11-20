@@ -8,7 +8,7 @@ const programSchema = new Schema({
   tipo: { type: String },
   categoria: { type: String },
   imagen: { type: String },
-  conductores: [{ nombre: String, rol: String }],
+  conductores: [{ nombre: String, rol: String, foto: String}],
   redes: {
     instagram: String,
     youtube: String,
